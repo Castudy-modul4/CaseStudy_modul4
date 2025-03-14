@@ -22,8 +22,12 @@ public class LoaiCanHoService implements ILoaiCanHoService{
 
     @Override
     public void update(int id, LoaiCanHo s) {
-
+        if (loaiCanHoRepository.existsById(id)) {
+            s.setMaLoaiCanHo(id);
+            loaiCanHoRepository.save(s);
+        }
     }
+
 
     @Override
     public void remove(int id) {

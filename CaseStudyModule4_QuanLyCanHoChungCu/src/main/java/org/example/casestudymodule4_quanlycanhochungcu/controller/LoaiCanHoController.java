@@ -22,9 +22,6 @@ public class LoaiCanHoController {
     @Autowired
     private ILoaiCanHoService loaiCanHoService;
 
-    @Autowired
-    private ILoaiCanHoRepository loaiCanHoRepository;
-
     @GetMapping("/list")
     public String showListLoaiCanHo(Model model,
                                     @RequestParam(value = "name" , defaultValue = "") String tenLoaiCanHo) {
@@ -61,4 +58,28 @@ public class LoaiCanHoController {
         redirectAttributes.addFlashAttribute("message","thêm mới loại căn h thành công !");
         return "redirect:/loaiCanHo/list";
     }
+
+    @GetMapping("/update/{id}")
+    public String showUpdateLoaiCanHo(@PathVariable("id") Integer id, Model model) {
+        LoaiCanHo loaiCanHo = loaiCanHoService.findById(id);
+        if (loaiCanHo == null) {
+            return "redirect:/loaiCanHo/list";
+        }
+        model.addAttribute("loaiCanHo", loaiCanHo);
+        return "loaiCanHo/update";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateLoaiCanHo(@Validated @ModelAttribute("loaiCanHo") LoaiCanHo loaiCanHo,
+                                  @PathVariable("id") Integer id,
+                                  BindingResult bindingResult,
+                                  RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            return "loaiCanHo/update";
+        }
+        loaiCanHoService.update(id,loaiCanHo);
+        redirectAttributes.addFlashAttribute("message", "Cập nhật loại căn hộ thành công!");
+        return "redirect:/loaiCanHo/list";
+    }
+
 }

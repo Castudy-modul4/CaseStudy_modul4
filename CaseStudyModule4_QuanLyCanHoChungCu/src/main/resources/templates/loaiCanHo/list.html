@@ -9,9 +9,9 @@
 <div class="container mt-4">
     <h2 class="text-center">Danh sách Loại Căn Hộ</h2>
 
-    <!-- Nút thêm mới -->
-    <div class="d-flex justify-content-end mb-3">
-        <a th:href="@{/loaiCanHo/create}" class="btn btn-success">Thêm mới</a>
+    <!-- Thông báo thành công -->
+    <div th:if="${message}" class="alert alert-success" role="alert">
+        <span th:text="${message}"></span>
     </div>
 
     <!-- Form tìm kiếm -->
@@ -23,6 +23,11 @@
         </div>
     </form>
 
+    <!-- Nút thêm mới -->
+    <div class="mb-3 text-end">
+        <a th:href="@{/loaiCanHo/create}" class="btn btn-success">Thêm mới</a>
+    </div>
+
     <!-- Bảng hiển thị danh sách -->
     <table class="table table-bordered table-hover">
         <thead class="table-dark">
@@ -30,23 +35,28 @@
             <th>Mã Loại</th>
             <th>Tên Loại Căn Hộ</th>
             <th>Giá Thuê Tiêu Chuẩn</th>
-            <th>Hành động</th> <!-- Thêm cột hành động -->
+            <th>Hành động</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="loai : ${loaiCanHos}">
             <td th:text="${loai.maLoaiCanHo}"></td>
             <td th:text="${loai.tenLoaiCanHo}"></td>
-            <td th:text="${loai.giaThueTieuChuan} + ' VNĐ'"></td>
+            <td th:text="${#numbers.formatDecimal(loai.giaThueTieuChuan, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></td>
+
             <td>
-                <a th:href="@{/loaiCanHo/edit/{id}(id=${loai.maLoaiCanHo})}" class="btn btn-warning btn-sm">Sửa</a>
-                <a th:href="@{/loaiCanHo/delete/{id}(id=${loai.maLoaiCanHo})}"
-                   class="btn btn-danger btn-sm"
-                   onclick="return confirm('Bạn có chắc chắn muốn xóa?');">Xóa</a>
+                <a th:href="@{/loaiCanHo/update/{id}(id=${loai.maLoaiCanHo})}" class="btn btn-warning btn-sm">Sửa</a>
+                <a th:href="@{/loaiCanHo/delete/{id}(id=${loai.maLoaiCanHo})}" class="btn btn-danger btn-sm"
+                   onclick="return confirm('Bạn có chắc chắn muốn xóa không?');">Xóa</a>
             </td>
         </tr>
         </tbody>
     </table>
+
+    <!-- Hiển thị thông báo khi danh sách trống -->
+    <div th:if="${#lists.isEmpty(loaiCanHos)}" class="alert alert-warning text-center">
+        Không có loại căn hộ nào!
+    </div>
 </div>
 </body>
 </html>
