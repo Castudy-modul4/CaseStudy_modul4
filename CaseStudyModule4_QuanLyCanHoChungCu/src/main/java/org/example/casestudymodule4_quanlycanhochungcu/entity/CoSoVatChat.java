@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -21,6 +22,9 @@ public class CoSoVatChat {
     @ManyToOne
     @JoinColumn(name = "tinh_trang_co_so_vat_chat_ma_tinh_trang_co_so_vat_chat")
     private TinhTrangCoSoVatChat tinhTrangCoSoVatChat;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date ngayBaoTriCuoi;
     private String ghiChuBaoTriCuoi;
 

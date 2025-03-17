@@ -8,7 +8,7 @@ import lombok.Setter;
 
 import java.util.Set;
 
-@Entity
+    @Entity
 @Setter
 @Getter
 @AllArgsConstructor
@@ -24,7 +24,6 @@ public class KhachHang {
     private String mail;
     private String sdt;
 
-    // Mối quan hệ many-to-many với CanHo
     @ManyToMany
     @JoinTable(
             name = "khach_hang_can_ho",
