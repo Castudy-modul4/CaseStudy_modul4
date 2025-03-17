@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public interface ILoaiCanHoService extends IService<LoaiCanHo> {
+public interface ILoaiCanHoService extends IServiceTin<LoaiCanHo> {
 
 
 

@@ -1,4 +1,4 @@
-package org.example.casestudymodule4_quanlycanhochungcu.Repository;
+package org.example.casestudymodule4_quanlycanhochungcu.repository;
 
 
 

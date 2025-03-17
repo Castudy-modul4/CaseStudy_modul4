@@ -1,7 +1,7 @@
-package org.example.casestudymodule4_quanlycanhochungcu.Controller;
+package org.example.casestudymodule4_quanlycanhochungcu.controller;
 
 import jakarta.validation.Valid;
-import org.example.casestudymodule4_quanlycanhochungcu.Service.ITaiKhoanService;
+import org.example.casestudymodule4_quanlycanhochungcu.service.ITaiKhoanService;
 import org.example.casestudymodule4_quanlycanhochungcu.entity.TaiKhoan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

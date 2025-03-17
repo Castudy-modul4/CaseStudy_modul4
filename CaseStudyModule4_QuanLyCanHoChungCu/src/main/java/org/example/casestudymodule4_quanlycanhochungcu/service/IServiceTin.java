@@ -2,7 +2,7 @@ package org.example.casestudymodule4_quanlycanhochungcu.service;
 
 import java.util.List;
 
-public interface IService<T> {
+public interface IServiceTin<T> {
     List<T> getAll();
 
     void save(T s);

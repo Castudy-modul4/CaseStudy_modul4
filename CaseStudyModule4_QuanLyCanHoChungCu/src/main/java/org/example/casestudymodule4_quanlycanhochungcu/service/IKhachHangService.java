@@ -4,6 +4,6 @@ import org.example.casestudymodule4_quanlycanhochungcu.entity.KhachHang;
 import org.springframework.stereotype.Service;
 
 @Service
-public interface IKhachHangService extends IService<KhachHang>{
+public interface IKhachHangService extends IServiceTin<KhachHang>{
     void addCanHoToKhachHang(int khachHangId, int canHoId);
 }

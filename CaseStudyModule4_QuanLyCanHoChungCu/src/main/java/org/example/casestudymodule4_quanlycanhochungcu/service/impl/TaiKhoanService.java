@@ -1,7 +1,7 @@
-package org.example.casestudymodule4_quanlycanhochungcu.Service.impl;
+package org.example.casestudymodule4_quanlycanhochungcu.service.impl;
 
-import org.example.casestudymodule4_quanlycanhochungcu.Repository.TaiKhoanRepository;
-import org.example.casestudymodule4_quanlycanhochungcu.Service.ITaiKhoanService;
+import org.example.casestudymodule4_quanlycanhochungcu.repository.TaiKhoanRepository;
+import org.example.casestudymodule4_quanlycanhochungcu.service.ITaiKhoanService;
 import org.example.casestudymodule4_quanlycanhochungcu.entity.TaiKhoan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -4,5 +4,5 @@ import org.example.casestudymodule4_quanlycanhochungcu.entity.TinhTrangCoSoVatCh
 import org.springframework.stereotype.Service;
 
 @Service
-public interface ITinhTrangCoSoVatChatService extends IService<TinhTrangCoSoVatChat>{
+public interface ITinhTrangCoSoVatChatService extends IServiceTin<TinhTrangCoSoVatChat>{
 }
