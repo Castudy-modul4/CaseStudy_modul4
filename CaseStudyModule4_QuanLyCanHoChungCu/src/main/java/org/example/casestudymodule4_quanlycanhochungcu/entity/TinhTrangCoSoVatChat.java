@@ -18,5 +18,5 @@ public class TinhTrangCoSoVatChat {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int maTinhTrangCoSoVatChat;
-    private String tenTinhTrangCoSoVatChat;
+    private String tenTinhTrangCoSoVatChat; // TỐT , HƯ HỎNG , ĐANG BẢO TRÌ
 }

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Danh sách Cơ sở Vật Chất</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+  <h2 class="text-center">Danh sách Cơ sở Vật Chất</h2>
+
+  <!-- Thông báo thành công -->
+  <div th:if="${message}" class="alert alert-success" role="alert">
+    <span th:text="${message}"></span>
+  </div>
+
+  <!-- Form tìm kiếm -->
+  <form th:action="@{/coSoVatChat/list}" method="get" class="mb-3">
+    <div class="input-group">
+      <input type="text" name="name" class="form-control" placeholder="Nhập tên cơ sở vật chất..."
+             th:value="${tenCoSoVatChat}">
+      <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+    </div>
+  </form>
+
+  <!-- Nút thêm mới -->
+  <div class="mb-3 text-end">
+    <a th:href="@{/coSoVatChat/create}" class="btn btn-success">Thêm mới</a>
+  </div>
+
+  <!-- Bảng hiển thị danh sách -->
+  <table class="table table-bordered table-hover">
+    <thead class="table-dark">
+    <tr>
+      <th>Mã</th>
+      <th>Tên Cơ sở Vật Chất</th>
+      <th>Tình Trạng</th>
+      <th>Ngày Bảo Trì</th>
+      <th>Ghi Chú</th>
+      <th>Hành động</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="csvc : ${coSoVatChats}">
+      <td th:text="${csvc.maCoSoVatChat}"></td>
+      <td th:text="${csvc.tenCoSoVatChat}"></td>
+      <td th:text="${csvc.tinhTrangCoSoVatChat.tenTinhTrangCoSoVatChat}"></td>
+      <td th:text="${#dates.format(csvc.ngayBaoTriCuoi, 'dd/MM/yyyy')}"></td>
+      <td th:text="${csvc.ghiChuBaoTriCuoi}"></td>
+
+      <td>
+        <a th:href="@{/coSoVatChat/update/{id}(id=${csvc.maCoSoVatChat})}" class="btn btn-warning btn-sm">Sửa</a>
+        <a th:href="@{/coSoVatChat/delete/{id}(id=${csvc.maCoSoVatChat})}" class="btn btn-danger btn-sm"
+           onclick="return confirm('Bạn có chắc chắn muốn xóa không?');">Xóa</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- Hiển thị thông báo khi danh sách trống -->
+  <div th:if="${#lists.isEmpty(coSoVatChats)}" class="alert alert-warning text-center">
+    Không có cơ sở vật chất nào!
+  </div>
+</div>
+</body>
+</html>
