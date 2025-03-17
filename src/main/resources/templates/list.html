@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Danh sách căn hộ</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<h1>Danh sách căn hộ</h1>
+
+<a th:href="@{/CanHo/create}">
+    <button>Thêm mới</button>
+</a>
+
+<form th:action="@{/CanHo/list}" method="get">
+    <label for="name">Tìm kiếm theo mã căn hộ:</label>
+    <input type="text" id="name" name="name" th:value="${name}" autocomplete="off">
+
+    <label for="loaiCanHo">Loại căn hộ:</label>
+    <select id="loaiCanHo" name="loaiCanHo">
+        <option value="">Tất cả</option>
+        <option th:each="loai : ${loaiCanHos}" th:value="${loai.maLoaiCanHo}" th:text="${loai.tenLoaiCanHo}"
+                th:selected="${loaiCanHo == loai.maLoaiCanHo}"></option>
+    </select>
+
+    <label for="tinhTrangCoSoVatChat">Tình trạng cơ sở vật chất:</label>
+    <select id="tinhTrangCoSoVatChat" name="tinhTrangCoSoVatChat">
+        <option value="">Tất cả</option>
+        <option th:each="tinhTrang : ${tinhTrangCoSoVatChats}" th:value="${tinhTrang.maTinhTrangCoSoVatChat}" th:text="${tinhTrang.tenTinhTrangCoSoVatChat}"
+                th:selected="${maTinhTrangCoSoVatChat == tinhTrang.maTinhTrangCoSoVatChat}"></option>
+    </select>
+
+    <label for="tinhTrangCanHo">Tình trạng căn hộ</label>
+    <select id="tinhTrangCanHo" name="tinhTrangCanHo">
+        <option value="">Tất cả</option>
+        <option th:each="tinhTrang:${tinhTrangCanHos}" th:value="${tinhTrang.maTinhTrangCanHo}" th:text="${tinhTrang.tenTinhTrangCanHo}"
+            th:selected="${maTinhTrangCanHo==tinhTrang.maTinhTrangCanHo}">
+        </option>
+    </select>
+
+    <button type="submit">Tìm kiếm</button>
+</form>
+
+<table>
+    <thead>
+    <tr>
+        <th>Mã căn hộ</th>
+        <th>Loại căn hộ</th>
+        <th>Tình trạng</th>
+        <th>Thời gian thuê</th>
+        <th>Ngày bắt đầu thuê</th>
+        <th>Hành động</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="canHo : ${canHos}">
+        <td th:text="${canHo.maCanHo}"></td>
+        <td th:text="${canHo.loaiCanHo.tenLoaiCanHo}"></td>
+        <td th:text="${canHo.tinhTrangCanHo.tenTinhTrangCanHo}"></td>
+        <td th:text="${canHo.thoiGianThue}"></td>
+        <td th:text="${#dates.format(canHo.ngayBatDauThue, 'dd/MM/yyyy')}"></td>
+        <td>
+            <button class="btn btn-danger" data-bs-toggle="modal"
+                    th:attr="data-bs-target='#modalDelete' + ${canHo.maCanHo}">
+                Xóa
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div th:if="${canHos.totalPages > 1}">
+    <a th:if="${canHos.hasPrevious()}" th:href="@{/CanHo/list(page=${canHos.number - 1}, name=${name})}">Previous</a>
+    <span th:text="${canHos.number + 1}"></span> / <span th:text="${canHos.totalPages}"></span>
+    <a th:if="${canHos.hasNext()}" th:href="@{/CanHo/list(page=${canHos.number + 1}, name=${name})}">Next</a>
+</div>
+<div th:each="CanHo : ${canHos}">
+    <div class="modal fade" th:id="'modalDelete' + ${CanHo.maCanHo}" tabindex="-1"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Xóa Căn Hộ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p th:text="'Bạn có chắc muốn xóa căn hộ có mã là ' + ${CanHo.maCanHo} + '?'"></p>
+                    <small style="color: red; font-style: italic">Lưu ý hành động này không thể hoàn tác!</small>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <a th:href="@{/CanHo/{maCanHo}/delete(maCanHo=${CanHo.maCanHo})}">Xóa bằng link</a>
+                    <button type="button" class="btn btn-danger"
+                            th:onclick="|window.location.href='/CanHo/' + ${CanHo.maCanHo} + '/delete'|">Xác nhận
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:if="${message != null}" class="alert alert-success" role="alert" id="message" th:text="${message}"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
