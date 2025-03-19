@@ -19,4 +19,10 @@
   Page<CanHo> findAllByTinhTrangCanHo_MaTinhTrangCanHo(Integer maTinhTrangCanHo, Pageable pageable);
   Page<CanHo> findAllByTinhTrangCanHo_MaTinhTrangCanHoAndLoaiCanHo_MaLoaiCanHo(Integer maTinhTrangCanHo, Integer maLoaiCanHo, Pageable pageable);
   Page<CanHo> findAllByTinhTrangCanHo_MaTinhTrangCanHoAndLoaiCanHo_MaLoaiCanHoAndTinhTrangCoSoVatChat_MaTinhTrangCoSoVatChat(Integer maTinhTrangCanHo, Integer maLoaiCanHo, Integer maTinhTrangCoSoVatChat, Pageable pageable);
+  List<CanHo> findAllByIsDeletedFalse();
+  Page<CanHo> findAllByIsDeletedFalse(Pageable pageable);
+  CanHo findByMaCanHoAndIsDeletedFalse(Integer maCanHo);
+  List<CanHo> findAllByIsDeletedTrue();
+  Page<CanHo> findAllByIsDeletedTrue(Pageable pageable);
+  CanHo findByMaCanHoAndIsDeletedTrue(Integer maCanHo);
  }

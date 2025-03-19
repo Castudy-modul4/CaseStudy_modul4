@@ -1,15 +1,17 @@
 package org.example.casestudymodule4_quanlycanhochungcu.service.impl;
 
 import org.example.casestudymodule4_quanlycanhochungcu.entity.PhanHoiKhachHang;
+import org.example.casestudymodule4_quanlycanhochungcu.repository.IPhanHoiKhachHangRepository;
 import org.example.casestudymodule4_quanlycanhochungcu.service.ICanHoService;
 import org.example.casestudymodule4_quanlycanhochungcu.service.IPhanHoiKhachHangService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class PhanHoiKhachHangService implements IPhanHoiKhachHangService {
     @Autowired
-    private IPhanHoiKhachHangService phanHoiKhachHangService;
+    private IPhanHoiKhachHangRepository phanHoiKhachHangService;
     @Override
     public List<PhanHoiKhachHang> getAll() {
         return List.of();
@@ -32,7 +34,7 @@ public class PhanHoiKhachHangService implements IPhanHoiKhachHangService {
 
     @Override
     public void delete(int id) {
-        phanHoiKhachHangService.delete(id);
+        phanHoiKhachHangService.deleteById(id);
     }
 
     @Override

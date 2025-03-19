@@ -29,9 +29,6 @@ public class CanHo {
     @NotNull
     private LoaiCanHo loaiCanHo;
 
-    @Version
-    private Integer version;
-
     @ManyToOne
     @JoinColumn(name = "tinh_trang_can_ho_ma_tinh_trang_can_ho")
     @NotNull
@@ -41,10 +38,9 @@ public class CanHo {
 
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull
     private Date ngayBatDauThue;
 
-    @ManyToMany(mappedBy = "canHo", cascade = CascadeType.REMOVE)
+    @ManyToMany(mappedBy = "canHo")
     private Set<KhachHang> khachHangs;
 
     @OneToMany(mappedBy = "canHo", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -54,4 +50,5 @@ public class CanHo {
     @JoinColumn(name = "tinhTrangCoSoVatChat_id")
     @NotNull
     private TinhTrangCoSoVatChat tinhTrangCoSoVatChat;
+    private boolean isDeleted;
 }
