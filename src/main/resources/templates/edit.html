@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chỉnh sửa căn hộ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    </style>
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Chỉnh sửa căn hộ</h1>
+
+    <form th:action="@{/CanHo/update/{id}(id=${canHo.maCanHo})}" method="post" th:object="${canHo}">
+        <input type="hidden" th:field="*{maCanHo}" />
+        <div class="form-group">
+            <label for="loaiCanHo">Loại căn hộ:</label>
+            <select id="loaiCanHo" name="loaiCanHo" class="form-select" th:field="*{loaiCanHo}">
+                <option th:each="loaiCanHo : ${loaiCanHos}" th:value="${loaiCanHo.maLoaiCanHo}" th:text="${loaiCanHo.tenLoaiCanHo}" ></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="tinhTrangCanHo">Tình trạng căn hộ:</label>
+            <select id="tinhTrangCanHo" name="tinhTrangCanHo" class="form-select" th:field="*{tinhTrangCanHo}">
+                <option th:each="tinhTrangCanHo : ${tinhTrangCanHos}" th:value="${tinhTrangCanHo.maTinhTrangCanHo}" th:text="${tinhTrangCanHo.tenTinhTrangCanHo}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="thoiGianThue">Thời gian thuê</label>
+            <input type="text" class="form-control" id="thoiGianThue" name="thoiGianThue" th:field="*{thoiGianThue}">
+        </div>
+        <div class="form-group">
+            <label for="ngayBatDauThue">Ngày bắt đầu thuê</label>
+            <input type="date" class="form-control" id="ngayBatDauThue" name="ngayBatDauThue" th:field="*{#dates.format(ngayBatDauThue, 'yyyy-MM-dd')}">
+        </div>
+        <div class="form-group">
+            <label for="tinhTrangCoSoVatChat">Tình trạng cơ sở vật chất:</label>
+            <select id="tinhTrangCoSoVatChat" name="tinhTrangCoSoVatChat" class="form-select" th:field="*{tinhTrangCoSoVatChat}">
+                <option th:each="tinhTrangCoSoVatChat : ${tinhTrangCoSoVatChats}" th:value="${tinhTrangCoSoVatChat.maTinhTrangCoSoVatChat}" th:text="${tinhTrangCoSoVatChat.tenTinhTrangCoSoVatChat}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Lưu</button>
+        <a th:href="@{/CanHo/list}" class="btn btn-secondary">Hủy</a>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -18,5 +18,8 @@ public interface ICanHoService extends IService<CanHo> {
   Page<CanHo> findAllByTinhTrangCanHoAndLoaiCanHo1(Integer maTinhTrangCanHo, Integer maLoaiCanHo, Pageable pageable);
   Page<CanHo> findAllByTinhTrangCanHoAndLoaiCanHoAndTinhTrangCoSoVatChat1(Integer maTinhTrangCanHo, Integer maLoaiCanHo, Integer maTinhTrangCoSoVatChat, Pageable pageable);
   Page<CanHo> getAll(Pageable pageable);
+  List<CanHo> getAllDeleted();
+  Page<CanHo> findAllDeleted(Pageable pageable);
+  void restore(int maCanHo);
 }
 
